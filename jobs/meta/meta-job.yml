@@ -1,0 +1,32 @@
+- scm:
+    name: meta-job-repo
+    scm:
+      - git:
+          url: git@github.com:ikhripunov/connect-simple-todos-app.git
+          branches:
+            - origin/master
+          credentials-id: 088d3940-55c4-4d8c-85c5-007886b9555c
+- job:
+    name: "meta-jjb"
+    description: "Creates Jenkins jobs with JJB from repositories provided"
+    project-type: freestyle
+    node: jjb
+    logrotate:
+      numToKeep: 20
+    scm:
+      - meta-job-repo
+    triggers:
+      - pollscm: "*/5 * * * *"
+    builders:
+      - shell: |
+          set +x
+          echo password=${ADMIN_PASSWORD} >> jjb-config.ini
+          echo url=${JENKINS_REAL_URL} >> jjb-config.ini
+          set -x
+          jobs/meta/scripts/builder.sh
+    wrappers:
+      - credentials-binding:
+        - username-password-separated:
+            credential-id: 940065ee-9235-47c8-b81f-0cf30a26336f
+            username: ADMIN_USERNAME
+            password: ADMIN_PASSWORD
