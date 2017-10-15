@@ -1,4 +1,6 @@
 #!/bin/bash
 
-echo 'I should run through repository list, extract jobs and update them in Jenkins as needed'
-jenkins-jobs --conf jjb-config.ini update jobs/meta/meta-job.yml
+while IFS= read -r line; do
+	echo 'Updating $line';
+    jenkins-jobs --conf jjb-config.ini update "$line";
+done < < ( find ./jobs -maxdepth 2 -type f -name "*.yml" )
