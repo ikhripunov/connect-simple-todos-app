@@ -2,7 +2,8 @@
 Frontend for sample CRUD app
 
 == Installation Instructions
-npm generate-api-client
+npm install
+npm run generate-api-client
 npm start
 
 == Build Status

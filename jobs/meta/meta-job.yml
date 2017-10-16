@@ -18,12 +18,9 @@
     triggers:
       - pollscm: "*/5 * * * *"
     builders:
-      - shell: |
-          set +x
-          echo password=${ADMIN_PASSWORD} >> jjb-config.ini
-          echo url=${JENKINS_REAL_URL} >> jjb-config.ini
-          set -x
-          jobs/meta/scripts/builder.sh
+      - dsl:
+          script-text:
+            !include-raw job.dsl
     wrappers:
       - credentials-binding:
         - username-password-separated:
