@@ -2,6 +2,8 @@
 Frontend for sample CRUD app
 
 == Installation Instructions
+npm install
+
 npm generate-api-interface  
 
 npm start
