@@ -11,6 +11,8 @@ api.use(cors.actual);
 api.use(restify.plugins.bodyParser());
 api.use(restify.plugins.queryParser());
 
+const port = 3001;
+
 let todos: Todo[] = [];
 
 class TodoController implements ITodoApiController {
@@ -47,6 +49,6 @@ const todoRouter = new TodoApiRouter(api, todoController);
 
 todoRouter.registerRoutes();
 
-api.listen(3001, function () {
-    console.log('sever is listening');
+api.listen(port, function () {
+    console.log('server is listening on port', port);
 });

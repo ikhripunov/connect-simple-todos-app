@@ -5,7 +5,7 @@
     "title": "Todo",
     "description": ""
   },
-  "host": "localhost:3000",
+  "host": "localhost:3001",
   "schemes": ["http"],
   "paths": {
     "/resolve-todo/{id}": {
