@@ -19,8 +19,7 @@
       - pollscm: "*/5 * * * *"
     builders:
       - dsl:
-          script-text:
-            !include-raw job.dsl
+          target: "jobs/meta/job.groovy"
     wrappers:
       - credentials-binding:
         - username-password-separated:
