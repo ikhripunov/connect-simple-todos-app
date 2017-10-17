@@ -1,4 +1,4 @@
-node {
+node("jjb") {
   def app
 
 
