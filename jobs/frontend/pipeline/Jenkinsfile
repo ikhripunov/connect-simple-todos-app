@@ -1,6 +1,8 @@
 node {
   def app
 
+  agent { label 'jjb' }
+
   stage('Clone repository') {
     checkout([
       $class: 'GitSCM', 
