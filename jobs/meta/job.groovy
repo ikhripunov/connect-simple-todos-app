@@ -1,15 +1,15 @@
-import groovy.io.FileType
-
 job('meta-jjb') {
   scm {
-    git('git@github.com:ikhripunov/connect-simple-todos-app.git')
+    git('git@github.com:ikhripunov/connect-simple-todos-app.git'){
+      node -> node / extensions()
+    }
   }
   triggers {
     scm('H/15 * * * *')
   }
   steps {
     def dir = new File(".")
-    dir.eachFile (FileType.FILES) { file ->
+    dir.eachFile (groovy.io.FileType.FILES) { file ->
       println file.path
     }
     dsl {
