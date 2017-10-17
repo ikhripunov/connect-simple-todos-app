@@ -1,5 +1,4 @@
-node('jjb') {
-  label 'jjb'
+node {
 
   def app
   stage('Clone repository') {
