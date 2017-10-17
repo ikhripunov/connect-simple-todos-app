@@ -5,8 +5,8 @@ node {
     	  checkout([$class: 'GitSCM', branches: [[name: '*/master']],
     	  doGenerateSubmoduleConfigurations: false, extensions: [],
     	  submoduleCfg: [], userRemoteConfigs:
-    	  [[credentialsId: 'gitlab-repo-creds',
-    	  url: 'git@gitlab-selfhosted.org:test-group/docker-image-file.git']]])
+    	  [[credentialsId: 'jenkins-clearpoint',
+    	  url: 'git@github.com:ikhripunov/connect-simple-todos-app.git']]])
 	}
 
 	stage('Build image') {
