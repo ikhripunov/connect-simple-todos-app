@@ -26,7 +26,10 @@ node("jjb") {
   }
 
   stage('Build image') {
-    sh '''cp jobs/backend/pipeline/Dockerfile ./Dockerfile'''
+    sh '''
+      cp jobs/backend/pipeline/Dockerfile ./Dockerfile;
+      dockerd;
+    '''
     app = docker.build("simple-backend")
   }
 
