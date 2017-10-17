@@ -10,7 +10,7 @@ node("jjb") {
       extensions: [],
       submoduleCfg: [],
       userRemoteConfigs: [[
-        credentialsId: 'jenkins-clearpoint',
+        credentialsId: '088d3940-55c4-4d8c-85c5-007886b9555c',
         url: 'git@github.com:ikhripunov/connect-simple-todos-app.git'
       ]]
     ])
