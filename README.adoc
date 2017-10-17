@@ -2,7 +2,7 @@
 This is a simple To Dos app written in Node/Typescript for demonstrating the Connect approach to continuous integration and deployment of a microservice
 
 == Installation Instructions
-How to install
+See the respective `swagger-frontend` and `swagger-backend` folders for READMEs
 
 == Build Status
 TravisCI link
