@@ -5,7 +5,7 @@ job('meta-jjb') {
     }
   }
   triggers {
-    scm('H/15 * * * *')
+    scm('*/5 * * * *')
   }
   steps {
     dsl {

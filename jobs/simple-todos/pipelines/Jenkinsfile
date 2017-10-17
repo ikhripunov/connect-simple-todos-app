@@ -1,36 +1,42 @@
 node {
-	def app
+  def app
 
-	stage('Clone repository') {
-    	  checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-    	  doGenerateSubmoduleConfigurations: false, extensions: [],
-    	  submoduleCfg: [], userRemoteConfigs:
-    	  [[credentialsId: 'jenkins-clearpoint',
-    	  url: 'git@github.com:ikhripunov/connect-simple-todos-app.git']]])
-	}
+  stage('Clone repository') {
+    checkout([
+      $class: 'GitSCM', 
+      branches: [[name: '*/master']],
+      doGenerateSubmoduleConfigurations: false, 
+      extensions: [],
+      submoduleCfg: [], 
+      userRemoteConfigs: [[
+        credentialsId: 'jenkins-clearpoint',
+        url: 'git@github.com:ikhripunov/connect-simple-todos-app.git'
+      ]]
+    ])
+  }
 
-	stage('Build image') {
-    	  app = docker.build("docker-image")
-	}
+  stage('Build image') {
+    app = docker.build("docker-image")
+  }
 
-	stage('Test image') {
-       	  sh '''
-       	  if ! docker inspect docker-image &> /dev/null; then
-            echo 'docker-image does not exist!'
-            exit 1
-       	  fi
-       	  '''
-	}
+  stage('Test image') {
+    sh '''
+      if ! docker inspect docker-image &> /dev/null; then
+        echo 'docker-image does not exist!'
+      exit 1
+    fi
+    '''
+  }
 
-	stage('Push image') {
-    	  echo 'Push image'
-    	  docker.withRegistry('https://local-registry:9666', 'registry-creds') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-    	  }
-	}
+  stage('Push image') {
+    echo 'Push image'
+    docker.withRegistry('https://local-registry:9666', 'registry-creds') {
+      app.push("${env.BUILD_NUMBER}")
+      app.push("latest")
+    }
+  }
 
-	stage('Clean existing image') {
-  	  sh "docker rmi docker-image"
-	}
+  stage('Clean existing image') {
+    sh "docker rmi docker-image"
+  }
 }
