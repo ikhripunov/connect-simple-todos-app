@@ -1,10 +1,5 @@
-pipeline {
-  agent {
-    node {
-      label 'jjb'
-      def app
-    }
-  }
+node {
+  label 'jjb'
 
   stages {
     stage('Clone repository') {
