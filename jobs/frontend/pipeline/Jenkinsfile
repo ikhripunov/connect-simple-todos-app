@@ -3,7 +3,9 @@ pipeline {
     node {
       label 'jjb'
       def app
+    }
 
+    stages {
       stage('Clone repository') {
         checkout([
           $class: 'GitSCM',
