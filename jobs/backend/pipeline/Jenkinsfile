@@ -26,7 +26,8 @@ node("jjb") {
   }
 
   stage('Build image') {
-    app = docker.build("jobs/backend/pipeline")
+    sh '''cd jobs/backend/pipeline'''
+    app = docker.build("simple-backend")
   }
 
   stage('Test image') {
