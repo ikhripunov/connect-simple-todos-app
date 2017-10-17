@@ -2,11 +2,9 @@
 Frontend for sample CRUD app
 
 == Installation Instructions
-npm install
+yarn install
 
-npm generate-api-interface  
-
-npm start
+yarn start
 
 == Build Status
 TODO
