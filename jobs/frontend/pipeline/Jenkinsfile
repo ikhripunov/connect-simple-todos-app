@@ -15,6 +15,15 @@ node {
     ])
   }
 
+  stage('Build backend') {
+    sh '''
+      cd swagger-backend;
+      yarn install
+      yarn generate-api-interface
+      yarn compile
+    '''
+  }
+
   stage('Build image') {
     app = docker.build("docker-image")
   }

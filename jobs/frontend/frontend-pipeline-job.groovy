@@ -1,5 +1,5 @@
-pipelineJob('testpipeline-build') {
-  description('Build test docker image, test and push it to local registry')
+pipelineJob('Frontend-build') {
+  description('Build docker image, test and push it to local registry')
   label('jjb')
   triggers {
     scm('*/5 * * * *')
@@ -11,7 +11,7 @@ pipelineJob('testpipeline-build') {
           node -> node / extensions()
         }
       }
-      scriptPath('jobs/simple-todos/pipelines/Jenkinsfile')
+      scriptPath('jobs/frontend/pipeline/Jenkinsfile')
     }
   }
 }
