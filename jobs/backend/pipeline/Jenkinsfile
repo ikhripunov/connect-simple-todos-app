@@ -19,16 +19,15 @@ node("jjb") {
   stage('Build backend') {
     sh '''
       cd swagger-backend;
-      yarn install
-      yarn generate-api-interface
-      yarn compile
+      yarn install;
+      yarn generate-api-interface;
+      yarn compile;
     '''
   }
 
   stage('Build image') {
     sh '''
       cp jobs/backend/pipeline/Dockerfile ./Dockerfile;
-      dockerd;
     '''
     app = docker.build("simple-backend")
   }
