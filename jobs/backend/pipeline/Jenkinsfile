@@ -33,17 +33,14 @@ node("jjb") {
   }
 
   stage('Test image') {
-    sh '''
-      if ! docker inspect docker-image &> /dev/null; then
-        echo 'docker-image does not exist!'
-        exit 1
-      fi
-    '''
+    app.inside {
+      sh 'This is a test!'
+    }
   }
 
   stage('Push image') {
     echo 'Push image'
-    docker.withRegistry('https://local-registry:9666', 'registry-creds') {
+    docker.withRegistry('http://docker-registry.connect.cd:5000/v2/_catalog', 'registry-creds') {
       app.push("${env.BUILD_NUMBER}")
       app.push("latest")
     }
