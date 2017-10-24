@@ -1,4 +1,5 @@
 node_modules/
 build/
 dist/
-**/src/generated-*.ts
+**/**/generated-*.ts
+**/.idea/
