@@ -1,7 +1,7 @@
 node_modules/
 build/
 dist/
-**/src/generated-*.ts
+**/**/generated-*.ts
 
 # User-specific stuff:
 .idea/**/workspace.xml
