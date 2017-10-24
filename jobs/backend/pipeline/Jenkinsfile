@@ -34,7 +34,7 @@ node("jjb") {
 
   stage('Test image') {
     app.withRun {
-      sh 'This is a test!'
+      echo 'This is a test!'
     }
   }
 
