@@ -15,7 +15,3 @@ spec:
         image: ikhripunov/simple-backend:latest
         ports:
         - containerPort: 3001
-        readinessProbe:
-          httpGet:
-            path: /get-todos
-            port: 3001
