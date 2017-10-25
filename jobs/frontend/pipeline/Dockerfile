@@ -6,6 +6,6 @@ RUN mkdir app
 COPY ./swagger-frontend/build ./build/
 COPY ./swagger-frontend/package.json .
 COPY ./swagger-frontend/node_modules ./node_modules
-EXPOSE 3001
+EXPOSE 3000
 RUN npm install -g yarn
 ENTRYPOINT ["yarn", "start"]
