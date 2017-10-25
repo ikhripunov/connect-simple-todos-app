@@ -1,6 +1,6 @@
-node {
-
+node("jjb") {
   def app
+
   stage('Clone repository') {
     checkout([
       $class: 'GitSCM',
@@ -15,37 +15,50 @@ node {
     ])
   }
 
-  stage('Build backend') {
+  stage('Build frontend') {
     sh '''
-      cd swagger-backend;
-      yarn install
-      yarn generate-api-interface
-      yarn compile
+      cd swagger-frontend;
+      yarn install;
+      yarn generate-api-client;
+      yarn build;
     '''
   }
 
   stage('Build image') {
-    app = docker.build("docker-image")
+    sh '''
+      cp jobs/frontend/pipeline/Dockerfile ./Dockerfile;
+    '''
+    app = docker.build('ikhripunov/simple-frontend')
   }
 
   stage('Test image') {
-    sh '''
-      if ! docker inspect docker-image &> /dev/null; then
-        echo 'docker-image does not exist!'
-      exit 1
-    fi
-    '''
-  }
-
-  stage('Push image') {
-    echo 'Push image'
-    docker.withRegistry('https://local-registry:9666', 'registry-creds') {
-      app.push("${env.BUILD_NUMBER}")
-      app.push("latest")
+    app.withRun {
+      echo 'This is a test!'
     }
   }
 
+  stage('Push image') {
+    withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                            credentialsId: 'registry-creds',
+                            usernameVariable: 'DOCKER_HUB_USER',
+                            passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
+      sh '''
+        docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD;
+        docker push ikhripunov/simple-frontend;
+      '''
+    }
+  }
+
+  stage('Deploy') {
+    sh '''
+      kubectl apply -f jobs/frontend/pipeline/frontend.yml;
+      kubectl apply -f jobs/frontend/pipeline/service.yml;
+    '''
+  }
+
   stage('Clean existing image') {
-    sh "docker rmi docker-image"
+    sh '''
+      docker rmi ikhripunov/simple-frontend
+    '''
   }
 }
