@@ -20,7 +20,7 @@ node("jjb") {
       cd swagger-frontend;
       yarn install;
       yarn generate-api-client;
-      yarn build;
+      yarn build --production;
     '''
   }
 

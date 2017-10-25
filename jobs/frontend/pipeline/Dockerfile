@@ -1,11 +1,9 @@
-FROM node:6.9.4
+FROM node:8.7.0
 
-VOLUME /todo
-WORKDIR /todo
-RUN mkdir app
-COPY ./swagger-frontend/build ./build/
-COPY ./swagger-frontend/package.json .
-COPY ./swagger-frontend/node_modules ./node_modules
+ENV NPM_CONFIG_LOGLEVEL warn
+
+RUN npm install -g serve
 EXPOSE 3000
-RUN npm install -g yarn
-ENTRYPOINT ["yarn", "start"]
+
+COPY ./swagger-frontend/build ./build
+ENTRYPOINT ["serve", "-s", "build", "-p", "3000"]
