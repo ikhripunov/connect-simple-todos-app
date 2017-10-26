@@ -52,6 +52,7 @@ node("jjb") {
   stage('Deploy') {
     sh '''
       kubectl apply -f jobs/backend/pipeline/backend.yml;
+      kubectl apply -f jobs/backend/pipeline/service.yml;
     '''
   }
 
