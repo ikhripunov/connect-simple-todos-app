@@ -5,7 +5,7 @@
           url: git@github.com:ikhripunov/connect-simple-todos-app.git
           branches:
             - origin/sidecar-dind
-          credentials-id: 088d3940-55c4-4d8c-85c5-007886b9555c
+          credentials-id: jenkins-clearpoint
 - job:
     name: "meta-jjb"
     description: "Creates Jenkins jobs with JJB from repositories provided"

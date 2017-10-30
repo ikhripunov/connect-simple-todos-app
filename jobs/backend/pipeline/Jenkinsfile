@@ -14,7 +14,7 @@ node("jjb") {
       extensions: [],
       submoduleCfg: [],
       userRemoteConfigs: [[
-        credentialsId: '088d3940-55c4-4d8c-85c5-007886b9555c',
+        credentialsId: 'jenkins-clearpoint',
         url: 'git@github.com:ikhripunov/connect-simple-todos-app.git'
       ]]
     ])
@@ -39,7 +39,9 @@ node("jjb") {
   }
 
   stage('Push image') {
-    kubernetes.image().withName("docker-registry.connect.cd/ikhripunov/simple-backend").push().toRegistry()
+    docker.withServer('tcp://localhost:2375') {
+      app.push("latest")
+    }
   }
 
   stage('Deploy') {
