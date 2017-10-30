@@ -2,7 +2,7 @@ node_modules/
 build/
 dist/
 **/**/generated-*.ts
-**/.idea/
+/.idea/
 
 # User-specific stuff:
 .idea/**/workspace.xml
@@ -50,3 +50,7 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+/swagger-backend/app/app.js
+/swagger-backend/app/app.js.map
+/swagger-backend/app/generated-interface.js
+/swagger-backend/app/generated-interface.js.map
