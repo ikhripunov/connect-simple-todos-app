@@ -1,6 +1,6 @@
 job('meta-jjb') {
   scm {
-    git('git@github.com:ikhripunov/connect-simple-todos-app.git'){
+    git('git@github.com:ClearPointNZ/connect-simple-todos-app.git'){
       node -> node / extensions()
     }
   }

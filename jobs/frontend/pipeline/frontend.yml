@@ -12,6 +12,6 @@ spec:
     spec:
       containers:
       - name: master
-        image: ikhripunov/simple-frontend:latest
+        image: docker-registry.connect.cd/simple-app/simple-frontend:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 80

@@ -3,7 +3,7 @@ FROM node:8.7.0
 ENV NPM_CONFIG_LOGLEVEL warn
 
 RUN npm install -g serve
-EXPOSE 3000
+EXPOSE 80
 
 COPY ./swagger-frontend/build ./build
-ENTRYPOINT ["serve", "-s", "build", "-p", "3000"]
+ENTRYPOINT ["serve", "-s", "build", "-p", "80"]

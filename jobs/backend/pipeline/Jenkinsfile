@@ -10,7 +10,7 @@ node("jjb") {
       submoduleCfg: [],
       userRemoteConfigs: [[
         credentialsId: '088d3940-55c4-4d8c-85c5-007886b9555c',
-        url: 'git@github.com:ikhripunov/connect-simple-todos-app.git'
+        url: 'git@github.com:ClearPointNZ/connect-simple-todos-app.git'
       ]]
     ])
   }
@@ -28,7 +28,7 @@ node("jjb") {
     sh '''
       cp jobs/backend/pipeline/Dockerfile ./Dockerfile;
     '''
-    app = docker.build('ikhripunov/simple-backend')
+    app = docker.build('docker-registry.connect.cd/simple-app/simple-backend')
   }
 
   stage('Test image') {
@@ -40,11 +40,11 @@ node("jjb") {
   stage('Push image') {
     withCredentials([[$class: 'UsernamePasswordMultiBinding',
                             credentialsId: 'registry-creds',
-                            usernameVariable: 'DOCKER_HUB_USER',
-                            passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
+                            usernameVariable: 'DOCKER_USER',
+                            passwordVariable: 'DOCKER_PASSWORD']]) {
       sh '''
         docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD;
-        docker push ikhripunov/simple-backend;
+        docker push docker-registry.connect.cd/simple-app/simple-backend;
       '''
     }
   }
@@ -58,7 +58,7 @@ node("jjb") {
 
   stage('Clean existing image') {
     sh '''
-      docker rmi ikhripunov/simple-backend
+      docker rmi docker-registry.connect.cd/simple-app/simple-backend
     '''
   }
 }
